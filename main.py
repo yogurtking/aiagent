@@ -11,7 +11,10 @@ client = genai.Client(api_key=api_key)
 
 
 def main():
-   
+    if len(sys.argv) > 3 and sys.argv[2] == "--verbose":
+        verbose == True
+    else:
+        verbose == False
 
     if len(sys.argv) < 2:
         print("Usage: python my_script.py 'your prompt here'")
@@ -25,8 +28,12 @@ def main():
     )
     #print("Hello from aiagent!")
     print(response.text)
-    print("Prompt tokens:", response.usage_metadata.prompt_token_count)
-    print("Response tokens:", response.usage_metadata.candidates_token_count)
+    if verbose == True:
+        print("User prompt:",sys.argv[1])
+        print("Prompt tokens:", response.usage_metadata.prompt_token_count)
+        print("Response tokens:", response.usage_metadata.candidates_token_count)
+
+
 
 
 if __name__ == "__main__":
